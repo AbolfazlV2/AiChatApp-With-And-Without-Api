@@ -52,11 +52,11 @@ function App() {
       const reply =
         typeof response === "string"
           ? response
-          : response.message?.content || "No reply recived";
+          : response.message?.content || " 🟠 No reply recived";
 
       addMesages(reply, false);
     } catch (err) {
-      addMesages(`Error: ${err.message || "Somthing went Wrong."}`, false);
+      addMesages(`Error: ${err.message || "🔴Somthing went Wrong."}`, false);
     } finally {
       setIsLoading(false);
     }
@@ -76,6 +76,16 @@ function App() {
         <h1 className="text-6xl sm:text-7xl font-light bg-gradient-to-r from-emerald-400 via-sky-300 to-blue-500 bg-clip-text text-transparent text-center h-20">
           Ai Chat App
         </h1>
+
+        <div
+          className={`px-4 py-2 rounded-full text-sm${
+            aiReady
+              ? "bg-green-500/20 text-green-300 border border-green-500/30"
+              : "bg-yellow-500/20 text-yellow-300 border border-yellow-500/20"
+          }`}
+        >
+          {aiReady ? "🟢 Ai Ready" : "🟡 Waiting for Ai..."}
+        </div>
       </div>
     </>
   );
