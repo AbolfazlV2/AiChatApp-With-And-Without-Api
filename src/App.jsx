@@ -32,6 +32,35 @@ function App() {
       { content: msg, isUser, id: Date.now() + Math.random() },
     ]);
   };
+
+  const sendMessge = async () => {
+    const message = inputValue.trim();
+    if (!message) return;
+
+    if (!aiReady) {
+      addMesages("Ai service is still loading. Please wait...", false);
+      return;
+    }
+
+    addMesages(message, true);
+    setInputValue("");
+    setIsLoading(true);
+
+    try {
+      const response = await window.puter.ai.chat(message);
+
+      const reply =
+        typeof response === "string"
+          ? response
+          : response.message?.content || "No reply recived";
+
+      addMesages(reply, false);
+    } catch (err) {
+      addMesages(`Error: ${err.message || "Somthing went Wrong."}`, false);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   useEffect(scrollToBottom, [messages]);
 
   return (
