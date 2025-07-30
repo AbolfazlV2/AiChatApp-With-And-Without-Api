@@ -23,12 +23,17 @@ function App() {
   }, []);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({behavior: "smooth"});
-  }
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
+  const addMesages = (msg, isUser) => {
+    setMessages((prev) => [
+      ...prev,
+      { content: msg, isUser, id: Date.now() + Math.random() },
+    ]);
+  };
   useEffect(scrollToBottom, [messages]);
 
-  
   return (
     <>
       <div className="min-h-screen bg-gradient-to-br from-sky-900 via-slate-950 to-emerald-900 flex flex-col items-center justify-center p-4 gap-8">
