@@ -86,6 +86,68 @@ function App() {
         >
           {aiReady ? "🟢 Ai Ready" : "🟡 Waiting for Ai..."}
         </div>
+
+        <div className="w-full max-w-2xl bg-gradient-to-r from-gray-800/90 to-gray-700/90 backdrop-blur-md border border-gray-600 rounded-3xl p-6 shadow-2xl">
+          <div className="h-80 overflow-y-auto border-b border-gray-600 mb-6 p-4 bg-gradient-to-b from-gray-900/50 to-gray-800/50 rounded-2xl">
+            {messages.length === 0 && (
+              <div className="text-center text-gray-400 mt-20">
+                ✋ Start the Conversation by typeing a message below.
+              </div>
+            )}
+
+            {messages.map((msg) => (
+              <div
+                key={msg.id}
+                className={`p-3 m-2 rounded-2xl max-w-xs text-wrap ${
+                  msg.isUser
+                    ? "bg-gradient-to-r from-blue-600 to-emerald-500 text-white ml-auto text-right"
+                    : "bg-gradient-to-r from-emerald-600 to-indigo-600 text-white"
+                }`}
+              >
+                <div className="whitespace-pre-wrap">{msg.content}</div>
+              </div>
+            ))}
+
+            {isLoading && (
+              <div className="p-3 m-2 rounded-2xl max-w-xs bg-gradient-to-r from-emerald-600 to-indigo-600 text-white">
+                <div className="flex items-center gap-2">
+                  <div className="animate-spin w-4 h-4 border-2 border-white/30 border-t-white rounded-full"></div>
+                  Thinking...
+                </div>
+              </div>
+            )}
+
+            <div ref={messagesEndRef}></div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3">
+            <input
+              type="text"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onkeydown={handleKeyPress}
+              placeholder={
+                aiReady ? "type Your Message..." : "Wating for Ai to be ready"
+              }
+              disabled={!aiReady || isLoading}
+              className="flex-1 px-4 py-3 bg-gray-700/80 border border-gray-600 rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:shadow-xl focus:shadow-sky-400/10 focus:right-sky-500 transition duration-400 disabled:opacity-50 disabled:cursor-not-allowed"
+            />
+            <button
+              onClick={sendMessge}
+              disabled={!aiReady || isLoading || !inputValue.trim()}
+              className="px-6 py-3 bg-gradient-to-r from-sky-400 to-emerald hover:opacity-80 text-white font-semibold rounded-2xl transition disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isLoading ? (
+                <div className="flex items-center gap-2">
+                  <div className="animate-spin w-4 h-4 border-2 border-white/30 border-t-white rounded-full"></div>
+                  Sending
+                </div>
+              ) : (
+                "send"
+              )}
+            </button>
+          </div>
+        </div>
       </div>
     </>
   );
