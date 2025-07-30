@@ -61,6 +61,13 @@ function App() {
       setIsLoading(false);
     }
   };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter" && !e.shiftkey) {
+      e.preventDefalut();
+      sendMessge();
+    }
+  };
   useEffect(scrollToBottom, [messages]);
 
   return (
