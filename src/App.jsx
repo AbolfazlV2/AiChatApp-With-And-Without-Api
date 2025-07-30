@@ -1,4 +1,3 @@
-import { use } from "react";
 import { useState, useEffect, useRef } from "react";
 
 function App() {
@@ -9,6 +8,21 @@ function App() {
   // for scrolling messages we use of useRef
   const messagesEndRef = useRef(null);
 
+  useEffect(() => {
+    const checkReady = setInterval(() => {
+      if (
+        window.puter &&
+        window.puter.ai &&
+        typeof window.puter.ai.chat === "function"
+      ) {
+        setAiReady(true);
+        clearInterval(checkReady);
+      }
+    }, 300);
+    return () => clearInterval(checkReady);
+  }, []);
+
+  
   return (
     <>
       <div className="min-h-screen bg-gradient-to-br from-sky-900 via-slate-950 to-emerald-900 flex flex-col items-center justify-center p-4 gap-8">
