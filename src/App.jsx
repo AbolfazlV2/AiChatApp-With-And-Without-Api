@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 function App() {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState("");
-  const [aiReady, setAiReady] = useState(false);
+  const [aiReady, setAiReady] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   // for scrolling messages we use of useRef
   const messagesEndRef = useRef(null);
@@ -33,6 +33,7 @@ function App() {
     ]);
   };
 
+  // use fech for get Api Open Router
   const sendMessge = async () => {
     const message = inputValue.trim();
     if (!message) return;
@@ -47,13 +48,32 @@ function App() {
     setIsLoading(true);
 
     try {
-      const response = await window.puter.ai.chat(message);
+      const respoone = await fetch(
+        "https://openrouter.ai/api/v1/chat/completions",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "appliction/json", // نوع داده
+            Authorization: `Bearer ${import.meta.env.VITE_OPENROUTER_API_KEY}`, // کلید API از .env
+            "HTTP-Referer": "http://localhost:5173", // برای تأیید آدرس، اگه سایتی داری، اینجا بذار
+          },
+          body: JSON.stringify({
+            model: "openai/gpt-3.5-turbo",
+            messages: [
+              { role: "system", content: "You are a helpful AI assistant." },
+              ...messages.map((msg) => ({
+                role: msg.isUser ? "user" : "assistant",
+                content: msg.content,
+              })),
+              { role: "user", content: message },
+            ],
+          }),
+        }
+      );
 
+      const data = await respoone.json();
       const reply =
-        typeof response === "string"
-          ? response
-          : response.message?.content || " 🟠 No reply recived";
-
+        data.choices?.[0]?.message?.content || "🟠 No reply received";
       addMesages(reply, false);
     } catch (err) {
       addMesages(`Error: ${err.message || "🔴Somthing went Wrong."}`, false);
