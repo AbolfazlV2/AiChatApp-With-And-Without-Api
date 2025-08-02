@@ -1,10 +1,10 @@
 <div align="center">
-#AiChatBot
+<h1>AiChatBot</h1>
 </div>
 
 --
 
-## 🌟 What is Gemini Clone?
+## 🌟 What is AiChatBot ?
 
 "Ai ChatBot" is a simple AI chatbot developed using "React" and "JavaScript." It is connected to "puter" or the "OpenRouter API" and responds to your queries with Ai.
 This project is suitable for working with APIs and useState.
@@ -64,4 +64,5 @@ This project is suitable for working with APIs and useState.
    ## Go to [http://localhost:5173](http://localhost:5173)
 
 ## Preview
+
 ![Screenshot](./assets/Screenshot.png)
