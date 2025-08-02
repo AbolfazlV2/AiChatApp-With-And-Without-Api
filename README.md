@@ -1,12 +1,67 @@
-# React + Vite
+<div align="center">
+#AiChatBot
+</div>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+--
 
-Currently, two official plugins are available:
+## 🌟 What is Gemini Clone?
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+"Ai ChatBot" is a simple AI chatbot developed using "React" and "JavaScript." It is connected to "puter" or the "OpenRouter API" and responds to your queries with Ai.
+This project is suitable for working with APIs and useState.
 
-## Expanding the ESLint configuration
+--
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 💡Feachers
+
+- Simple user interface
+- Fast response
+- Support for multiple languages
+- Connected to puter and OpenRouter API
+
+--
+
+## ⚙️ Getting Started
+
+1. **Clone the project:**
+   ```bash
+   git clone https://github.com/AbolfazlV2/AiChatApp.git
+   ```
+2. **Move the folder:**
+
+   ```bash
+   cd AiChatBot
+   ```
+
+3. **Install packages:**
+
+   ```bash
+   npm install
+   ```
+
+4. **notice:**
+
+-- This ChatBot was developed with puter and the OpenRouter API.  
+--1.To use puter mode, without an API: Go to "WithPuter" branch.  
+--2.To use the OpenRouter API mode: Go to the "main" or "WithOpenAi-Api" branch and follow the steps below.
+
+5. **Set up your API key:**
+
+   - Generate a .env.local file in the root directory.
+   - Include the following line with your [OpenRouter](http://localhost:5173) API key:
+
+     ```env
+     VITE_OPENROUTER_API_KEY = "Your Api"
+     ```
+
+6. **Run the app:**
+
+   ```bash
+   vite
+   ```
+
+7. **Go to browser:**
+
+   ## Go to [http://localhost:5173](http://localhost:5173)
+
+## Preview
+![Screenshot](./assets/Screenshot.png)
